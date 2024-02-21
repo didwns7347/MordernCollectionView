@@ -20,6 +20,7 @@
 		50249F442B83A5D9003F4BF5 /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50249F432B83A5D9003F4BF5 /* BannerCollectionViewCell.swift */; };
 		50249F472B83A659003F4BF5 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 50249F462B83A659003F4BF5 /* SnapKit-Dynamic */; };
 		50249F4A2B83AF3F003F4BF5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 50249F492B83AF3F003F4BF5 /* Kingfisher */; };
+		50F53AAF2B8639240069ED96 /* NormalCaroselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F53AAE2B8639240069ED96 /* NormalCaroselCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		50249F342B839DA8003F4BF5 /* BasicCompositionalLayoutUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicCompositionalLayoutUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		50249F412B83A569003F4BF5 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		50249F432B83A5D9003F4BF5 /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
+		50F53AAE2B8639240069ED96 /* NormalCaroselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NormalCaroselCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				50249F1F2B839DA8003F4BF5 /* Info.plist */,
 				50249F412B83A569003F4BF5 /* Item.swift */,
 				50249F432B83A5D9003F4BF5 /* BannerCollectionViewCell.swift */,
+				50F53AAE2B8639240069ED96 /* NormalCaroselCollectionViewCell.swift */,
 			);
 			path = BasicCompositionalLayout;
 			sourceTree = "<group>";
@@ -279,6 +282,7 @@
 				50249F422B83A569003F4BF5 /* Item.swift in Sources */,
 				50249F162B839DA7003F4BF5 /* ViewController.swift in Sources */,
 				50249F122B839DA7003F4BF5 /* AppDelegate.swift in Sources */,
+				50F53AAF2B8639240069ED96 /* NormalCaroselCollectionViewCell.swift in Sources */,
 				50249F442B83A5D9003F4BF5 /* BannerCollectionViewCell.swift in Sources */,
 				50249F142B839DA7003F4BF5 /* SceneDelegate.swift in Sources */,
 			);

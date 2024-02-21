@@ -17,6 +17,12 @@ enum Item: Hashable {
 }
 struct HomeItem: Hashable {
     let title: String
-    let subTitle: String? = ""
+    let subTitle: String?
     let imageUrl: String
+    
+    init(title: String, imageUrl: String, subtitle: String? = "") {
+        self.title = title
+        self.imageUrl = imageUrl
+        self.subTitle = subtitle
+    }
 }

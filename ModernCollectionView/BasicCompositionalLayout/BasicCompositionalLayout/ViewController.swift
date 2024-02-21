@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let sampleImageUrl = "https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2F91%2Fd4%2Fa1%2F91d4a1a649745682b94ea8ddf2b8c7b9.jpg&type=a340"
+    
     let collectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: .init()
@@ -21,6 +23,7 @@ class ViewController: UIViewController {
         
         setUI()
         collectionView.register(BannerCollectionViewCell.self, forCellWithReuseIdentifier: BannerCollectionViewCell.id)
+        collectionView.register(NormalCaroselCollectionViewCell.self, forCellWithReuseIdentifier: NormalCaroselCollectionViewCell.id)
         collectionView.setCollectionViewLayout(createLayout(), animated: true)
         setDataSrouce()
         setSnapShot()
@@ -34,10 +37,21 @@ class ViewController: UIViewController {
     }
     
     private func createLayout() -> UICollectionViewCompositionalLayout {
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        
         return UICollectionViewCompositionalLayout(sectionProvider: {[weak self] sectionIndex, _ in
-            
-            return self?.createBannerSection()
-        })
+            switch sectionIndex {
+            case 0:
+                return self?.createBannerSection()
+            case 1:
+                return self?.createNormerSection()
+//            case 2:
+            default:
+                return self?.createBannerSection()
+            }
+//            return self?.createBannerSection()
+        }, configuration: config)
     }
     
     private func createBannerSection() -> NSCollectionLayoutSection {
@@ -55,6 +69,23 @@ class ViewController: UIViewController {
         return section
     }
     
+    private func createNormerSection() -> NSCollectionLayoutSection {
+        // item
+        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalHeight(1.0))
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        item.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10)
+        
+        //group
+        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7), heightDimension: .absolute(180))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize,subitems: [item])
+        
+        //section
+        let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+        section.orthogonalScrollingBehavior = .continuous
+        return section
+    }
+    
     private func setDataSrouce() {
         dataSource = UICollectionViewDiffableDataSource<Section, Item>(
             collectionView: self.collectionView,
@@ -67,6 +98,15 @@ class ViewController: UIViewController {
                     }
                     //
                     cell.config(title: item.title, imageUrl: item.imageUrl)
+                    return cell
+                case .normalCarousel(let item):
+                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NormalCaroselCollectionViewCell.id, for: indexPath) as? NormalCaroselCollectionViewCell
+                    else {
+                         return UICollectionViewCell()
+                    }
+                    //
+//                    cell.config(title: item.title, imageUrl: item.imageUrl)
+                    cell.config(imageUrl: item.imageUrl, title: item.title, subTitle: item.subTitle ?? "")
                     return cell
                 default :
                     return UICollectionViewCell()
@@ -98,6 +138,17 @@ class ViewController: UIViewController {
         ]
         snapshot.appendItems(bannerItems, toSection: Section(id: "Banner"))
         
+        
+        snapshot.appendSections([Section(id:"NormalCerosel")])
+        
+        let normalItems = [
+            Item.normalCarousel(HomeItem(title: "교촌치킨", imageUrl: sampleImageUrl, subtitle: "간장치킨")),
+            Item.normalCarousel(HomeItem(title: "굽내치킨", imageUrl: sampleImageUrl, subtitle: "오븐치킨")),
+            Item.normalCarousel(HomeItem(title: "BBQ", imageUrl: sampleImageUrl, subtitle: "올리브치킨")),
+            Item.normalCarousel(HomeItem(title: "프라닭", imageUrl: sampleImageUrl, subtitle: "프리미엄치킨")),
+            Item.normalCarousel(HomeItem(title: "처가집", imageUrl: sampleImageUrl, subtitle: "양념치킨"))
+        ]
+        snapshot.appendItems(normalItems, toSection: Section(id: "NormalCerosel"))
         dataSource?.apply(snapshot)
     }
 }
